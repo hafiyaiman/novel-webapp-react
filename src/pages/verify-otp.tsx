@@ -1,12 +1,69 @@
+import { login, validateOtp } from "@/api/auth";
 import { Logo } from "@/components/icons";
 import GuestLayout from "@/layouts/guest";
 import { Button } from "@heroui/button";
 import { Form } from "@heroui/form";
 import { InputOtp } from "@heroui/input-otp";
-import React from "react";
+import { Link } from "@heroui/link";
+import React, { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function VerifyOtpPage() {
-    const [otp, setOtp] = React.useState<string>("");
+    const [otp, setOtp] = useState<string>("");
+    const [resendCountdown, setResendCountdown] = useState<number>(2 * 60);
+    const [searchParams] = useSearchParams();
+    const email = searchParams.get("email");
+    const navigate = useNavigate();
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const otpValue = formData.get("otp") as string | null;
+
+        if (email && otpValue) {
+            try {
+                const response = await validateOtp(email, otpValue);
+                console.log("Validate OTP response:", response);
+                setOtp(otpValue);
+                navigate(`/`);
+            } catch (error) {
+                console.error("Validate OTP error:", error);
+            }
+        }
+    };
+
+    const handleResend = () => {
+        setResendCountdown(2 * 60);
+        if (email) {
+            try {
+                const response = login(email);
+                console.log("Login Success:", response);
+
+
+            } catch (error) {
+                console.error("Login Failed:", error);
+            }
+        }
+    };
+
+    React.useEffect(() => {
+        const intervalId = setInterval(() => {
+            setResendCountdown((prevCountdown) => {
+                if (prevCountdown === 0) {
+                    clearInterval(intervalId);
+                    return 0;
+                }
+                return prevCountdown - 1;
+            });
+        }, 1000);
+        return () => clearInterval(intervalId);
+    }, []);
+
+    const formatCountdown = (seconds: number) => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    };
 
     return (
         <GuestLayout>
@@ -17,30 +74,33 @@ export default function VerifyOtpPage() {
             </div>
 
             <Form className="flex w-full flex-col items-center gap-4"
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    const formData = new FormData(e.currentTarget);
-                    const otpValue = formData.get("otp") as string | null;
-
-                    if (otpValue) {
-                        setOtp(otpValue);
-                    }
-                }}>
+                onSubmit={handleSubmit}>
 
                 <InputOtp
                     isRequired
                     size="lg"
                     aria-label="OTP input field"
-                    length={4}
+                    length={6}
                     name="otp"
                     placeholder="Enter code"
                     variant="faded"
                 />
-                <Button size="sm" className="text-white w-full mt-2" type="submit" color="primary">
+
+                <Button size="sm" className="text-white w-full " type="submit" color="primary">
                     Submit
                 </Button>
-                {otp && <div className="text-small text-default-500">OTP submitted: {otp}</div>}
             </Form>
+
+            <p className="text-center text-small">
+                Didn't receive the code?&nbsp;
+                {resendCountdown > 0 ? (
+                    <span className="text-default-300 cursor-not-allowed">{formatCountdown(resendCountdown)}</span>
+                ) : (
+                    <Link className="cursor-pointer" size="sm" onPress={handleResend}>
+                        Resend
+                    </Link>
+                )}
+            </p>
         </GuestLayout>
     )
 }
