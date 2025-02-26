@@ -16,7 +16,8 @@ export default function NovelStackedCarousel() {
             const sortedNovels = data.data
                 .sort((a, b) =>
                     b.ratings - a.ratings || a.publication.localeCompare(b.publication)
-                );
+                )
+                .slice(0, 5);
             setNovels(sortedNovels);
         });
 
