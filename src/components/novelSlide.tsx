@@ -57,7 +57,7 @@ export default function NovelStackedCarousel() {
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Trending Now: </span>
                     <span className="font-bold"> Must-Read Novels</span>
                 </h1>
-                <p>
+                <p className="text-sm sm:text-base mt-2 text-white">
                     These books are taking the literary world by storm! Stay ahead of the trend and explore the most captivating stories of the moment.
                 </p>
             </div>

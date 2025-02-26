@@ -47,7 +47,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.shiftKey && event.key.toLowerCase() === "k") {
+      if (event.altKey && event.key.toLowerCase() === "k") {
         setShowSearch(true);
         event.preventDefault();
       }
@@ -129,7 +129,7 @@ export const Navbar = () => {
                         inputWrapper: "bg-default-100",
                         input: "text-sm",
                       }}
-                      endContent={<Kbd className="hidden lg:inline-block" keys={["shift"]}>K</Kbd>}
+                      endContent={<Kbd className="hidden lg:inline-block" keys={["alt"]}>K</Kbd>}
                       labelPlacement="outside"
                       placeholder="Search..."
                       startContent={<SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />}
