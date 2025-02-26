@@ -1,15 +1,6 @@
 # Novelify
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-This is a template for creating applications using Vite and HeroUI (v2).
-=======
 ![Novelify Poster](public/img/poster.png)
-
->>>>>>> Stashed changes
-=======
-![Novelify Poster](https://raw.githubusercontent.com/your-username/novelify/main/assets/poster.png)
->>>>>>> 595ba2a2232238ce1c0e895265b7bd5f7a988d31
 
 Novelify is a web application designed to enhance your reading experience by providing an intuitive and responsive interface for exploring and managing novels.
 
