@@ -1,15 +1,18 @@
-import { login, validateOtp } from "@/api/auth";
+import { validateOtp, login as loginAPI } from "@/api/auth";
 import { Logo } from "@/components/icons";
+import { AuthContext } from "@/context/AuthContext";
 import GuestLayout from "@/layouts/guest";
 import { Button } from "@heroui/button";
 import { Form } from "@heroui/form";
 import { InputOtp } from "@heroui/input-otp";
 import { Link } from "@heroui/link";
-import React, { useState } from "react";
+import { addToast } from "@heroui/toast";
+import React, { useContext, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function VerifyOtpPage() {
-    const [otp, setOtp] = useState<string>("");
+    const { login } = useContext(AuthContext);
+    // const [otp, setOtp] = useState<string>("");
     const [resendCountdown, setResendCountdown] = useState<number>(2 * 60);
     const [searchParams] = useSearchParams();
     const email = searchParams.get("email");
@@ -23,11 +26,16 @@ export default function VerifyOtpPage() {
         if (email && otpValue) {
             try {
                 const response = await validateOtp(email, otpValue);
-                console.log("Validate OTP response:", response);
-                setOtp(otpValue);
-                navigate(`/`);
+                login(response.user, response.token);
+                navigate(`/home`);
             } catch (error) {
-                console.error("Validate OTP error:", error);
+                addToast({
+                    color: "danger",
+                    title: "Login Failed",
+                    description: error instanceof Error ? error.message : "An error occurred",
+                    timeout: 3000,
+                    shouldShowTimeoutProgess: true,
+                });
             }
         }
     };
@@ -36,12 +44,18 @@ export default function VerifyOtpPage() {
         setResendCountdown(2 * 60);
         if (email) {
             try {
-                const response = login(email);
+                const response = loginAPI(email);
                 console.log("Login Success:", response);
 
 
             } catch (error) {
-                console.error("Login Failed:", error);
+                addToast({
+                    color: "danger",
+                    title: "Login Failed",
+                    description: error instanceof Error ? error.message : "An error occurred",
+                    timeout: 3000,
+                    shouldShowTimeoutProgess: true,
+                });
             }
         }
     };

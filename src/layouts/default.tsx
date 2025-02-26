@@ -2,6 +2,8 @@ import { Link } from "@heroui/link";
 import { GithubIcon, TwitterIcon, DiscordIcon } from "@/components/icons";
 import { Navbar } from "@/components/navbar";
 import { Logo } from "@/components/icons";
+import { ToastProvider } from "@heroui/toast";
+import { Divider } from "@heroui/divider";
 
 export default function DefaultLayout({
   children,
@@ -10,23 +12,26 @@ export default function DefaultLayout({
 }) {
   return (
     <div className="relative flex flex-col h-screen">
+      <ToastProvider />
       <Navbar />
       <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16">
         {children}
       </main>
+
       <footer className="w-full flex flex-col items-center justify-center py-3 text-white gap-2">
+        <Divider className="my-4" />
         <Logo />
         <div className="flex gap-4 mb-3">
-          <Link href="/" className="text-default hover:underline">
+          <Link href="/home" className="text-default hover:underline">
             Home
           </Link>
-          <Link href="/about" className="text-default hover:underline">
-            About
+          <Link href="/favorites" className="text-default hover:underline">
+            Favourite
           </Link>
-          <Link href="/blog" className="text-default hover:underline">
+          <Link href="#" className="text-default hover:underline">
             Blog
           </Link>
-          <Link href="/docs" className="text-default hover:underline">
+          <Link href="#" className="text-default hover:underline">
             Docs
           </Link>
         </div>

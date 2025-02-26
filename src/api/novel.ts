@@ -3,14 +3,18 @@ import { Novel } from "@/models/Novel";
 
 const LOCAL_STORAGE_KEY = "novelList";
 
-export async function novelList(): Promise<{ data: Novel[] }> {
+export async function novelList(forceRefresh = false): Promise<{ data: Novel[] }> {
     try {
-        const cachedData = localStorage.getItem(LOCAL_STORAGE_KEY);
-        if (cachedData) {
-            console.log("Using cached data");
-            return JSON.parse(cachedData);
+
+        if (!forceRefresh) {
+            const cachedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+            if (cachedData) {
+                console.log("Using cached data");
+                return JSON.parse(cachedData);
+            }
         }
 
+        console.log("Fetching fresh data from API...");
         const response = await fetch(`${API_BASE_URL}/fetchNovel`, {
             method: "GET",
             headers: {

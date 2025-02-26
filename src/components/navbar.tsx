@@ -17,8 +17,19 @@ import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { SearchIcon } from "@/components/icons";
 import { Logo } from "@/components/icons";
+import { useAuth } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@heroui/button";
 
 export const Navbar = () => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/"); // Redirect after logout
+  };
+
   const searchInput = (
     <Input
       variant="bordered"
@@ -94,20 +105,26 @@ export const Navbar = () => {
         {searchInput}
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "danger"
-                    : index === siteConfig.navMenuItems.length - 1
+            <NavbarMenuItem key={`${item.href}-${index}`}>
+              {item.label === "Logout" ? (
+                <Button color="danger" onPress={handleLogout}>
+                  Logout
+                </Button>
+              ) : (
+                <Link
+                  color={
+                    index === 2
                       ? "danger"
-                      : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
-                {item.label}
-              </Link>
+                      : index === siteConfig.navMenuItems.length - 1
+                        ? "danger"
+                        : "foreground"
+                  }
+                  href={item.href}
+                  size="lg"
+                >
+                  {item.label}
+                </Link>
+              )}
             </NavbarMenuItem>
           ))}
         </div>
