@@ -1,6 +1,11 @@
 # Vite & HeroUI Template
 
+<<<<<<< Updated upstream
 This is a template for creating applications using Vite and HeroUI (v2).
+=======
+![Novelify Poster](public/img/poster.png)
+
+>>>>>>> Stashed changes
 
 [Try it on CodeSandbox](https://githubbox.com/frontio-ai/vite-template)
 
