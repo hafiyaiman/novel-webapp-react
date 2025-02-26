@@ -6,7 +6,7 @@ interface AuthContextType {
     login: (userData: any, token: string) => void;
     logout: () => void;
     isAuthenticated: boolean;
-    isLoading: boolean; // Add loading state
+    isLoading: boolean;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -14,14 +14,14 @@ export const AuthContext = createContext<AuthContextType>({
     login: () => { },
     logout: () => { },
     isAuthenticated: false,
-    isLoading: true // Default to loading
+    isLoading: true
 });
 
 // Provide authentication state
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<any>(null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-    const [isLoading, setIsLoading] = useState<boolean>(true); // Add loading state
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token");

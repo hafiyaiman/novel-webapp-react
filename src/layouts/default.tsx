@@ -37,19 +37,19 @@ export default function DefaultLayout({
         </div>
         <div>
           <div className="flex gap-4">
-            <Link href="https://facebook.com" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+            <Link href="#" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
               <GithubIcon size={24} />
             </Link>
-            <Link href="https://twitter.com" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+            <Link href="#" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
               <TwitterIcon size={24} />
             </Link>
-            <Link href="https://instagram.com" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+            <Link href="#" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
               <DiscordIcon size={24} />
             </Link>
           </div>
 
         </div>
-        <p className="text-sm text-default">&copy; 2023 Novelify. All rights reserved.</p>
+        <p className="text-sm text-default">&copy; 2025 Novelify. All rights reserved.</p>
       </footer>
     </div>
   );

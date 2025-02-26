@@ -39,7 +39,7 @@ export default function HomePage() {
       <section className="px-4 space-y-10">
         <NovelSlide />
         <div>
-          {/* Refresh Button */}
+          {/* Refresh Button
           <div className="flex justify-end mb-2">
             <Button
               variant="flat"
@@ -49,8 +49,8 @@ export default function HomePage() {
             >
               Refresh
             </Button>
-          </div>
-          <NovelGrid novels={novels} />
+          </div> */}
+          <NovelGrid novels={novels} fetchNovels={fetchNovels} loading={loading} />
         </div>
 
       </section>

@@ -11,7 +11,7 @@ import { addToast } from "@heroui/toast";
 import { AuthContext } from "@/context/AuthContext";
 
 export default function SigninPage() {
-    const { login } = useContext(AuthContext); // Store user data in context
+    const { login } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -21,9 +21,16 @@ export default function SigninPage() {
         setLoading(true);
 
         try {
-            const response = await loginAPI(email); // Call API
-            login(response.user, response.token); // Store user info
-            navigate(`/verify-otp?email=${encodeURIComponent(email)}`); // Redirect
+            const response = await loginAPI(email);
+            // login(response.user, response.token);
+            addToast({
+                color: "success",
+                title: "This is your OTP",
+                description: response.otp,
+                timeout: 5000,
+                shouldShowTimeoutProgess: true,
+            })
+            navigate(`/verify-otp?email=${encodeURIComponent(email)}`);
         } catch (error) {
             addToast({
                 color: "danger",

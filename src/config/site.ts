@@ -23,8 +23,8 @@ export const siteConfig = {
       href: "/favorites",
     },
     {
-      label: "Logout",
-      href: "/logout",
+      label: isAuthenticate() ? "Logout" : "Login",
+      href: isAuthenticate() ? "/logout" : "/signin",
     },
   ],
   links: {
@@ -35,3 +35,8 @@ export const siteConfig = {
     sponsor: "https://patreon.com/jrgarciadev",
   },
 };
+
+function isAuthenticate() {
+  return !!localStorage.getItem("token");
+}
+

@@ -45,8 +45,15 @@ export default function VerifyOtpPage() {
         if (email) {
             try {
                 const response = loginAPI(email);
-                console.log("Login Success:", response);
-
+                response.then(data => {
+                    addToast({
+                        color: "success",
+                        title: "This is your OTP",
+                        description: data.otp,
+                        timeout: 5000,
+                        shouldShowTimeoutProgess: true,
+                    });
+                });
 
             } catch (error) {
                 addToast({

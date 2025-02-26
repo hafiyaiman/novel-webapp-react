@@ -5,9 +5,12 @@ import { Spinner } from "@heroui/spinner";
 const PrivateRoute = () => {
     const { isAuthenticated, isLoading } = useAuth();
 
-    // Show loading indicator or wait until authentication is determined
     if (isLoading) {
-        return <Spinner classNames={{ label: "text-foreground mt-4" }} label="wave" variant="wave" />;
+        return (
+            <div className="flex h-screen items-center justify-center">
+                <Spinner size="lg" classNames={{ label: "text-foreground mt-4" }} label="wave" variant="wave" />
+            </div>
+        );
     }
 
     return isAuthenticated ? <Outlet /> : <Navigate to="/signin" />;

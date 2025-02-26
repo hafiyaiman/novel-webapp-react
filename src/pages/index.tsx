@@ -1,30 +1,24 @@
 import { Link } from "@heroui/link";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
 import { button as buttonStyles } from "@heroui/theme";
 
-import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
 
 export default function IndexPage() {
   return (
     <DefaultLayout>
-      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 h-[calc(100vh-14rem)]">
         <div className="inline-block max-w-lg text-center justify-center">
-          <span className={title()}>Make&nbsp;</span>
-          <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
+          <span className={title()}>Discover&nbsp;</span>
+          <span className={title({ color: "violet" })}>captivating&nbsp;</span>
           <br />
-          <span className={title()}>
-            websites regardless of your design experience.
-          </span>
+          <span className={title()}>stories that spark your imagination.</span>
           <div className={subtitle({ class: "mt-4" })}>
-            Beautiful, fast and modern React UI library.
+            Explore trending novels, hidden gems, and timeless classics—all in one place.
           </div>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 text-white">
           <Link
             isExternal
             className={buttonStyles({
@@ -32,28 +26,19 @@ export default function IndexPage() {
               radius: "full",
               variant: "shadow",
             })}
-            href={siteConfig.links.docs}
+            href="/home"
           >
-            Documentation
+            Browse Novels
           </Link>
           <Link
             isExternal
             className={buttonStyles({ variant: "bordered", radius: "full" })}
-            href={siteConfig.links.github}
+            href="#"
           >
-            <GithubIcon size={20} />
-            GitHub
+            Explore Genres
           </Link>
         </div>
 
-        <div className="mt-8">
-          <Snippet hideCopyButton hideSymbol variant="bordered">
-            <span>
-              Get started by editing{" "}
-              <Code color="primary">pages/index.tsx</Code>
-            </span>
-          </Snippet>
-        </div>
       </section>
     </DefaultLayout>
   );
