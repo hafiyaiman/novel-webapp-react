@@ -8,18 +8,26 @@ import { title } from "@/components/primitives";
 
 export default function FavoritesPage() {
     const [favoriteNovels, setFavoriteNovels] = useState<Novel[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
-    useEffect(() => {
-        async function fetchFavorites() {
-            const response = await novelList(); // Response contains { data: Novel[] }
-            const allNovels = response.data; // Extract the array of novels
+
+    async function fetchFavorites() {
+        setLoading(true);
+        try {
+            const response = await novelList();
+            const allNovels = response.data;
             const favoriteIds = getFavoriteNovels();
 
             const filteredNovels = allNovels.filter((novel) => favoriteIds.includes(novel.id));
             setFavoriteNovels(filteredNovels);
+        } catch (error) {
+            console.error("Error fetching novels:", error);
+        } finally {
+            setLoading(false);
         }
+    }
 
-
+    useEffect(() => {
         fetchFavorites();
     }, []);
 
@@ -31,11 +39,13 @@ export default function FavoritesPage() {
                 </div>
             </section>
             <div>
-
                 {favoriteNovels.length === 0 ? (
-                    <p>No favorites yet.</p>
+                    <div className="flex items-center justify-center">
+                        <p>No favorites yet.</p>
+
+                    </div>
                 ) : (
-                    <NovelGrid novels={favoriteNovels} />
+                    <NovelGrid novels={favoriteNovels} fetchNovels={fetchFavorites} loading={loading} />
                 )}
             </div>
         </DefaultLayout>

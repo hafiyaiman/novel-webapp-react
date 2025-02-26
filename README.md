@@ -1,35 +1,38 @@
-# Vite & HeroUI Template
+# Novelify
 
-This is a template for creating applications using Vite and HeroUI (v2).
+![Novelify Poster](https://raw.githubusercontent.com/your-username/novelify/main/assets/poster.png)
 
-[Try it on CodeSandbox](https://githubbox.com/frontio-ai/vite-template)
+Novelify is a web application designed to enhance your reading experience by providing an intuitive and responsive interface for exploring and managing novels.
 
 ## Technologies Used
 
+- [React.js](https://react.dev/)
 - [Vite](https://vitejs.dev/guide/)
 - [HeroUI](https://heroui.com)
 - [Tailwind CSS](https://tailwindcss.com)
-- [Tailwind Variants](https://tailwind-variants.org)
 - [TypeScript](https://www.typescriptlang.org)
-- [Framer Motion](https://www.framer.com/motion)
+- [React Router](https://reactrouter.com/)
 
-## How to Use
+## Getting Started
 
-To clone the project, run the following command:
+### Clone the Repository
 
 ```bash
-git clone https://github.com/frontio-ai/vite-template.git
+git clone https://github.com/your-username/novelify.git
+cd novelify
 ```
 
-### Install dependencies
+### Install Dependencies
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+Using `npm`:
 
 ```bash
 npm install
 ```
 
-### Run the development server
+Alternatively, you can use `yarn`, `pnpm`, or `bun`.
+
+### Run the Development Server
 
 ```bash
 npm run dev
@@ -37,14 +40,26 @@ npm run dev
 
 ### Setup pnpm (optional)
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+If you are using `pnpm`, add the following to your `.npmrc` file:
 
 ```bash
 public-hoist-pattern[]=*@heroui/*
 ```
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+Then reinstall dependencies:
+
+```bash
+pnpm install
+```
+
+## Features
+
+- Browse and search for novels
+- View novel details 
+- Bookmark favorite novels
+- Responsive UI
 
 ## License
 
-Licensed under the [MIT license](https://github.com/frontio-ai/vite-template/blob/main/LICENSE).
+<!-- This project is licensed under the [MIT license](https://github.com/your-username/novelify/blob/main/LICENSE). -->
+

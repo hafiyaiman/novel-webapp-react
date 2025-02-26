@@ -49,12 +49,21 @@ export default function NovelStackedCarousel() {
         <div
             className="sm:flex flex-row sm:justify-between text-center items-center w-full h-auto bg-no-repeat bg-cover bg-center rounded-2xl p-6"
             style={{
-                backgroundImage: `url("https://heartwhispers.cafe/wp-content/uploads/2023/07/lifewithjoi33_therapist_office_minimal_D1BFA5_library_with_a_lo_e5a3d653-58e1-4237-9b48-ad108329a17e.png")`,
+                backgroundImage: `url('/img/bg-library.png')`
             }}
         >
-            <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-0 text-white">Top Novels</h1>
+            <div className="sm:text-start ">
+                <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight mb-4 sm:mb-0 text-white">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Trending Now: </span>
+                    <span className="font-bold"> Must-Read Novels</span>
+                </h1>
+                <p>
+                    These books are taking the literary world by storm! Stay ahead of the trend and explore the most captivating stories of the moment.
+                </p>
+            </div>
 
-            {/* Stacked Card Carousel */}
+
+            {/* Stacked Card */}
             <div className="relative w-full max-w-xs sm:max-w-md h-96 flex items-center justify-center mx-auto sm:mx-0">
                 {novels.map((novel, index) => {
                     const position = (index - currentIndex + novels.length) % novels.length;
@@ -65,15 +74,15 @@ export default function NovelStackedCarousel() {
                     let opacity = 1;
 
                     const isMobile = screenWidth < 640; // Check if mobile (sm breakpoint in Tailwind)
-                    const offset = isMobile ? 60 : 100; // Adjust X translation based on screen size
-                    const scaleFactor = isMobile ? 0.75 : 0.9; // Adjust scale for mobile
+                    const offset = isMobile ? 60 : 100;
+                    const scaleFactor = isMobile ? 0.75 : 0.9;
 
                     if (position === 1) {
-                        translateX = offset; // Next card moves slightly to the right
+                        translateX = offset;
                         scale = scaleFactor;
                         zIndex = 9;
                     } else if (position === novels.length - 1) {
-                        translateX = -offset; // Previous card moves slightly to the left
+                        translateX = -offset;
                         scale = scaleFactor;
                         zIndex = 9;
                     } else if (position > 1) {
@@ -93,17 +102,16 @@ export default function NovelStackedCarousel() {
                             }}
                         >
                             <div
-                                className="absolute top-2 left-2 w-10 h-10 flex items-center justify-center text-sm font-bold text-white bg-red-500 rounded-full shadow-md"
+                                className="absolute top-2 left-2 w-12 h-12 flex items-center justify-center text-md font-bold text-white bg-red-500 rounded-full shadow-md"
                                 style={{
                                     zIndex: 11,
                                 }}
                             >
-                                {index + 1}
+                                # {index + 1}
                             </div>
 
-
                             <Image
-                                src={`${FILE_BASE_URL}${novel.cover.formats.small.url}`}
+                                src={novel.cover?.formats?.small?.url ? `${FILE_BASE_URL}${novel.cover.formats.small.url}` : "/img/img-placeholder.png"}
                                 alt={novel.title}
                                 className="object-cover rounded-lg w-full h-full"
                             />
@@ -117,16 +125,16 @@ export default function NovelStackedCarousel() {
                     );
                 })}
 
-                {/* Navigation Buttons (Don't Overflow) */}
+                {/* Navigation Buttons  */}
                 <button
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 p-2 rounded-full bg-white shadow-md sm:left-6"
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 p-2 rounded-full bg-background shadow-md sm:left-6"
                     onClick={prevSlide}
                 >
                     <ChevronIcon className="w-6 h-6" />
                 </button>
 
                 <button
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 p-2 rounded-full bg-white shadow-md sm:right-6"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 p-2 rounded-full bg-background shadow-md sm:right-6"
                     onClick={nextSlide}
                 >
                     <ChevronIcon className="w-6 h-6 rotate-180" />

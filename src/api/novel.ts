@@ -3,14 +3,25 @@ import { Novel } from "@/models/Novel";
 
 const LOCAL_STORAGE_KEY = "novelList";
 
-export async function novelList(forceRefresh = false): Promise<{ data: Novel[] }> {
+export async function novelList(
+    forceRefresh = false,
+    searchQuery: string = ""
+): Promise<{ data: Novel[] }> {
     try {
-
         if (!forceRefresh) {
             const cachedData = localStorage.getItem(LOCAL_STORAGE_KEY);
             if (cachedData) {
                 console.log("Using cached data");
-                return JSON.parse(cachedData);
+                let parsedData = JSON.parse(cachedData);
+
+                // Apply search filter if a query is provided
+                if (searchQuery) {
+                    parsedData.data = parsedData.data.filter((novel: Novel) =>
+                        novel.title.toLowerCase().includes(searchQuery.toLowerCase())
+                    );
+                }
+
+                return parsedData;
             }
         }
 
@@ -25,6 +36,13 @@ export async function novelList(forceRefresh = false): Promise<{ data: Novel[] }
 
         const data = await response.json();
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
+
+        // Apply search filter if a query is provided
+        if (searchQuery) {
+            data.data = data.data.filter((novel: Novel) =>
+                novel.title.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        }
 
         return data;
     } catch (error) {
