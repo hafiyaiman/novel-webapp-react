@@ -1,6 +1,5 @@
-import { Navbar } from "@/components/navbar";
-import { Link } from "@heroui/link";
 import { ThemeSwitch } from "@/components/theme-switch";
+import { ToastProvider } from "@heroui/toast";
 
 
 export default function GuestLayout({
@@ -10,6 +9,7 @@ export default function GuestLayout({
 }) {
   return (
     <div className="relative flex flex-col h-screen">
+      <ToastProvider />
       <main className="container mx-auto max-w-xl px-6 flex-grow">
         <div className="flex h-full w-full items-center justify-center">
 
@@ -22,15 +22,6 @@ export default function GuestLayout({
         </div>
       </main>
       <footer className="w-full flex items-center justify-center py-3">
-        {/* <Link
-          isExternal
-          className="flex items-center gap-1 text-current"
-          href="https://heroui.com"
-          title="heroui.com homepage"
-        >
-          <span className="text-default-600">Powered by</span>
-          <p className="text-primary">HeroUI</p>
-        </Link> */}
       </footer>
     </div>
   );

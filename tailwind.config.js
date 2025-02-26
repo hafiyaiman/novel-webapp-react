@@ -19,21 +19,21 @@ module.exports = {
   darkMode: "class",
   plugins: [
     heroui({
-      prefix: "heroui", // prefix for themes variables
-      addCommonColors: false, // override common colors (e.g. "blue", "green", "pink").
-      layout: {}, // common layout tokens (applied to all themes)
+      prefix: "heroui",
+      addCommonColors: false,
+      layout: {},
       themes: {
         light: {
-          layout: {}, // light theme layout tokens
+          layout: {},
           colors: {
             primary: "#6A0DAD",
             secondary: "#FFD700",
-            background: "#F4F4F5",
+            background: "#F5F5F5",
             default: "#333333",
           },
         },
         dark: {
-          layout: {}, // dark theme layout tokens
+          layout: {},
           colors: {
             primary: "#8E3BB0",
             secondary: "#F4A261",
